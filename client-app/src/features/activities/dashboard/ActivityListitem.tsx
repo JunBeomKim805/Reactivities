@@ -9,15 +9,6 @@ interface Props {
 }
 
 export default function ActivityListItem({ activity }: Props) {
-  // const { activityStore } = useStore();
-
-  // function handleActivityDelete(
-  //   e: SyntheticEvent<HTMLButtonElement>,
-  //   id: string
-  // ) {
-  //   setTarget(e.currentTarget.name);
-  //   deleteActivity(id);
-  // }
   return (
     <Segment.Group>
       <Segment>
@@ -32,7 +23,7 @@ export default function ActivityListItem({ activity }: Props) {
         <Item.Group>
           <Item>
             <Item.Image
-              style={{ marginBottom: 5 }}
+              style={{ marginBottom: 3 }}
               size="tiny"
               circular
               src={activity.host?.image || "/assets/user.png"}
@@ -42,8 +33,8 @@ export default function ActivityListItem({ activity }: Props) {
                 {activity.title}
               </Item.Header>
               <Item.Description>
-                Hosed by{" "}
-                <Link to={`profiles/${activity.hostUsername}`}>
+                Hosted by{" "}
+                <Link to={`/profiles/${activity.hostUsername}`}>
                   {activity.host?.displayName}
                 </Link>
               </Item.Description>
@@ -67,17 +58,12 @@ export default function ActivityListItem({ activity }: Props) {
       </Segment>
       <Segment>
         <span>
-          <Icon name="clock" />
-          {format(activity.date!, "dd MMM yyyy h:mm aa")}
-          <Icon name="marker" />
-          {activity.venue}
+          <Icon name="clock" /> {format(activity.date!, "dd MMM yyyy h:mm aa")}
+          <Icon name="marker" /> {activity.venue}
         </span>
       </Segment>
       <Segment secondary>
-        <ActivityListItemAttendee
-          activity={activity}
-          attendess={activity.attendees!}
-        />
+        <ActivityListItemAttendee attendees={activity.attendees!} />
       </Segment>
       <Segment clearing>
         <span>{activity.description}</span>
